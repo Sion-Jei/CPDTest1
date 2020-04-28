@@ -1,1 +1,36 @@
-#include  <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+
+/**
+ * 
+ * @param argc CAntidad de argumentos
+ * @param argv Arreglo asociativo de argumentos
+ * @return el codigo de salida de la ejecucion del programa
+ */
+
+int main(int argc, char** argv){
+    
+    //Si hay argumentos vamos a procesar
+    if (argc > 1) {
+        //Obtenemos el largo del argumento procesado
+        int largo = strlen(argv[1]);
+        //Asignamos memoria para copiar el string
+        char* sujeto = (char *) calloc(largo+2, sizeof(char));
+        //Copiamos el contenido del argumento en el arreglo definido
+        snprintf(sujeto,largo+1, "%s", argv[1]);
+        
+        //Imprimimos el mensaje en la salida estandar
+        fprintf(stdout,"\nHola %s\n",sujeto);
+        
+        //Liberamos la memoria usada
+        free(sujeto);
+    
+        return EXIT_SUCCESS;
+    } else {
+        //Retornamos error y mostramos mensaje en la salida de error
+        fprintf(stderr,"\nNo hay argumentos suficientes para %s\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+}
